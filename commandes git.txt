@@ -1,0 +1,9 @@
+git --version
+
+git clone git@github.com:ousrah/dev201_24.git
+git pull
+
+
+git add .
+git commit -m "premier push"
+git push
