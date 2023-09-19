@@ -1,3 +1,7 @@
+
+create database librairie_201 collate utf8mb4_general_ci;
+use librairie_201;
+
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
