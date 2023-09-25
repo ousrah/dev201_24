@@ -208,29 +208,91 @@ where  d.villedep="Grenoble"
 group by c.librub ;
 
 
-
+use librairie_201;
 select librub, nbExemplaire,
 case 
 when nbExemplaire >1000 then 'eleve'
 else 'faible'
 end as 'etat stock'
- from Q19
+ from Q19;
+ 
+ select librub, nbExemplaire,
+if( nbExemplaire >1000 ,'eleve', 'faible' ) as 'etat stock'
+ from Q19;
+ 
  
 
 #21.	Liste des auteurs (nom + prénom) ayant écrit des livres sur 
 #le thème (LIBRUB) des « finances publiques » ou bien ayant écrit des livres
 # coûtant au moins 30 € au 1/10/2002 - réutiliser les requêtes 11 et 12. 
 
+create view Q12 as 
+select distinct concat(NomEcr , ' ' , PrenomEcr) as auteurs from ecrivain ecr
+join ecrire e on ecr.numecr = e.numecr
+join ouvrage o on e.numouvr = o.numouvr
+join classification c on c.numrub=o.numrub
+where c.librub="finances publiques";
+
+create view Q11 as
+select concat(NomEcr , ' ' , PrenomEcr) as auteurs from ecrivain ecr
+join ecrire e on ecr.numecr = e.numecr
+join ouvrage o on e.numouvr = o.numouvr
+join tarifer t on o.numouvr= t.numouvr
+where t.prixvente>=30 and t.datedeb="2002-10-01";
+
+(select * from Q12)
+union # union pour afficher sans doublons union all pour afficher avec doublons
+(select * from Q11);
 
 #22.	Liste des écrivains (nom et prénom) n’ayant écrit aucun des ouvrages 
 #présents dans la base. 
+select nomecr,prenomecr 
+from ecrivain 
+where numecr not in (select numecr from ecrire);
+
+
+select * 
+from ecrivain e 
+left join ecrire ec on e.numecr=ec.numecr
+where numouvr is null
+order by nomecr,prenomecr
+;
 
 
 #23.	Mettre à 0 le stock de l’ouvrage n°6 dans le dépôt Lyon2. 
+update stocker set qtestock = 0 
+where numouvr = 6
+and numdep in (select numdep from depot where nomdep = 'lyon2');
 
+update stocker join depot on stocker.numdep = depot.numdep
+set  qtestock = 0 #, champ=val,champ=val
+where numouvr = 6 
+and nomdep = 'lyon2';
 
 #24.	Supprimer tous les ouvrages de chez Vuibert de la table OUVRAGE.
 
+select * from ouvrage where nomed = 'vuibert';
+select * from ecrire where numouvr = 15;
+
+delete from ecrire where numouvr in 
+	(select numouvr from ouvrage where nomed = 'vuibert');
+delete from stocker where numouvr in 
+	(select numouvr from ouvrage where nomed = 'vuibert');
+delete from tarifer where numouvr in 
+	(select numouvr from ouvrage where nomed = 'vuibert');
+      
+
+delete from ouvrage where nomed = 'vuibert';
 
 #25.	créer une table contenant les éditeurs situés à Paris et leur n° de tel.  
+
+create table EditeursDeParis #copier les données dans une nouvelle table
+select nomed, teled from editeur where villeed = 'paris';
+
+create view EditeursDeParis2 as #créer une requette sur la/les tables originaux
+select nomed, teled from editeur where villeed = 'paris';
+
+select * from EditeursDeParis;
+select * from EditeursDeParis2;
+
 
