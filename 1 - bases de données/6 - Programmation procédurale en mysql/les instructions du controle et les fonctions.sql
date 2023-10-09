@@ -229,6 +229,16 @@ select equation2(2,56,10);
 select equation2(2,56,10);
 
 
+#Un patron décide de participer au prix de repas de ces employés,
+#il instaure les règles suivantes :
+#la participation du patron au repas est de 30%
+#si le salaire est inférieur à 3000DH la participation est  majorée de 10%
+#si l'employé est marié la participation est marjorée de 5%
+#pour chaque enfant on ajoute 5% 
+#le plafond de la participation ne peut jamais depasser 60%
+
+#on souhaite développer une fonction qui accept les paramètres necessaires et 
+#qui affiche le montant que le patron doit donner à l'emplyé après son repas
 
     
 	 #Les boucles
