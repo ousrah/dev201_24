@@ -138,7 +138,15 @@
     
     select jour(3);
     select jour(8);
-    drop function if exists equation;
+ 
+ #equation premier degrès
+ #Ax+B=0
+ #a=0 b=0 => R
+ #a=0 b!=0 => ensemble vide
+ #a!=0 => -b/a
+ 
+ 
+ drop function if exists equation;
  delimiter $$
 	create function equation(a float , b float)
     returns varchar(50)
@@ -162,18 +170,65 @@ select equation(3,5); # 3x+5=0      5 comparaisons  2     1
 select equation(3,0); # 3x+0=0      3 comparaisons  2     1
 select equation(0,0); # 0x+0=0      2 comparaisons  2    2
 
-Ax²+Bx+C=0
+#Equation deuxième degrès
+#Ax²+Bx+C=0
 
-A=0 b=0 c=0  => R
-a=0 b=0 c!=0  => ensemble vide
-a=0 b!=0   =>   -c/b
-a!=0   
-   delta=pow(b,2)-4ac #(b*b)-(4*a*c)
-   delta<0 => impossible dans R
-   delta =0 => x1=x2=-b/(2*a)
-   delta>0 =>  x1 = (-b-sqrt(delta))/(2*a)   x1 = (-b+sqrt(delta))/(2*a)
+#A=0 b=0 c=0  => R
+#a=0 b=0 c!=0  => ensemble vide
+#a=0 b!=0   =>   -c/b
+#a!=0   
+#   delta=pow(b,2)-4ac #(b*b)-(4*a*c)
+#   delta<0 => impossible dans R
+#   delta =0 => x1=x2=-b/(2*a)
+#   delta>0 =>  x1 = (-b-sqrt(delta))/(2*a)   x1 = (-b+sqrt(delta))/(2*a)
    
-   
+
+#---------------------------------------------------------------------------------------
+drop function  if exists equation2;
+delimiter &&
+create function equation2(a int , b int , c int )
+returns  varchar(50)
+deterministic 
+begin
+	declare x varchar(50) default "";
+    declare delta int default 0;
+	declare x1 int default 0;
+	declare x2 int default 0;
+    
+    if (a=0) then
+		if (b=0) then
+			if (c=0) then
+				set x="l'equation admet une solution dans R";
+			else
+				set x="ensemble vide"; 
+			end if;
+        else
+			set x= -c/b; 
+        end if;
+	else
+		set delta= pow(b,2)-4*a*c ;
+         if(delta<0) then 
+			set x="impossible";
+         elseif(delta=0) then 
+            set x=concat("la solution est: x1=x2=",-b/(2*a));
+         else 
+			set x1=(-b-sqrt(delta))/(2*a) ;
+			set x2=(-b+sqrt(delta))/(2*a);
+			set x=concat("la solution est",x1,",",x2);
+		end if;
+    end if;
+    return x;
+end &&
+delimiter ;
+
+select equation2(0,0,0);
+select equation2(0,0,2);
+select equation2(0,5,5);
+select equation2(2,4,2);
+select equation2(2,56,10);
+select equation2(2,56,10);
+
+
 
     
 	 #Les boucles
