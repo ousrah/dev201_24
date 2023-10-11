@@ -240,10 +240,106 @@ select equation2(2,56,10);
 #on souhaite développer une fonction qui accept les paramètres necessaires et 
 #qui affiche le montant que le patron doit donner à l'emplyé après son repas
 
-    
+use librairie_201;
+drop function if exists participation;
+delimiter $$
+create function participation(salaire float,marie bool,enfants int,prix float)
+returns varchar(255)
+deterministic
+begin 
+	declare p float default 0.3;
+    if (salaire < 3000) then
+		set p = p + 0.1;
+	end if;
+    if (marie is true) then
+		set p = p + 0.05;
+	end if;
+    set p = p + (0.05 * enfants);
+    if( p>0.6) then
+		set p=0.6;
+    end if;
+    return concat( round(prix * p,2),'DH  ',round(p*100,2), '%');
+end $$
+delimiter ;
+select participation(2500,true,5,35);
+select participation(3000,false,0,15);
+select participation(2500,true,1,170);
+select participation(2500,false,0,50);
+
+   
 	 #Les boucles
  
- 
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+returns bigint
+deterministic
+begin 
+	declare s float default 0;
+    declare i int default 1;
+	while i<=n do
+		set s = s + i;
+        set i = i+1;
+    end while;
+    return s;
+end $$
+delimiter ;
+
+
+
+
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+returns bigint
+deterministic
+begin 
+	declare s float default 0;
+    declare i int default 1;
+	b1: repeat 
+		set s = s + i;
+        set i = i+1;
+    until i>n end repeat b1;
+    return s;
+end $$
+delimiter ;
+
+
+
+
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+returns bigint
+deterministic
+begin 
+	declare s float default 0;
+    declare i int default 1;
+	boucle1: loop 
+		set s = s + i;
+        set i = i+1;
+        if (i>n) then
+			leave boucle1;
+        end if;
+    end loop boucle1;
+    return s;
+end $$
+delimiter ;
+
+
+
+select somme(5);
+
+#ecrire une fonction qui permet de faire la somme des n premier entier paires 
+#(utiliser une incremetation par 1 et le modulo)
+
+#ecrire une fonction qui calcule la factoriel d'un entier
+#5! =  5*4*3*2;
+#1!=1
+#0!=1;
+
+
+
  #Les fonctions
  
  
@@ -268,3 +364,5 @@ select equation2(2,56,10);
  #La gestion des erreurs
  
  #La sécurité
+ 
+ #La sauvegarde et la resauration des données
