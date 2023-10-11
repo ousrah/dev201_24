@@ -268,7 +268,7 @@ select participation(2500,false,0,50);
 
    
 	 #Les boucles
- 
+ use librairie_201;
 drop function if exists somme;
 delimiter $$
 create function somme(n int)
@@ -279,13 +279,13 @@ begin
     declare i int default 1;
 	while i<=n do
 		set s = s + i;
-        set i = i+1;
-    end while;
+		set i = i+1;	
+	end while;
     return s;
 end $$
 delimiter ;
 
-
+select somme(10);
 
 
 drop function if exists somme;
@@ -333,21 +333,105 @@ select somme(5);
 #ecrire une fonction qui permet de faire la somme des n premier entier paires 
 #(utiliser une incremetation par 1 et le modulo)
 
+
+use librairie_201;
+drop function if exists somme;
+delimiter $$
+create function sommeP(n int)
+returns bigint
+deterministic
+begin 
+	declare s float default 0;
+    declare i int default 1;
+	while i<=n do
+		if i%2=0 then
+			set s = s + i;
+	    end if;
+		set i = i+1;	
+	end while;
+    return s;
+end $$
+delimiter ;
+
+select sommeP(10);
+
+
 #ecrire une fonction qui calcule la factoriel d'un entier
 #5! =  5*4*3*2;
 #1!=1
 #0!=1;
 
+#-------------> repeat 
+
+drop function if exists FactorielR;
+delimiter $$
+	create function FactorielR(n int)
+	returns bigint
+    deterministic 
+    begin
+		declare F int default 1;
+        declare i int default 1;
+        repeat  
+				set F=F*i;
+            	set i=i+1;
+        until i>n end repeat;
+	return F;
+    end $$
+delimiter ;
+select FactorielR(5);
+select FactorielR(0);
+select FactorielR(1);
+
+#methode recursive est interdite par MYSQL pour des raisons de performance
+
+
+drop function if exists FactorielR;
+delimiter $$
+	create function FactorielR(n int) #0
+	returns bigint
+    deterministic 
+    begin
+		declare F int default 1;   
+		if n>1 then
+			set F=n*factorielR(n-1); # 5 * 4*3*2*1
+		end if; 	
+		return F;
+    end $$
+delimiter ;
+select FactorielR(5);
+select FactorielR(0);
+select FactorielR(1);
+
+
+
 
 
  #Les fonctions
+ select * from editeur;
+ 
+
+ 
+ drop function if exists moyenneParEditeur;
+ delimiter $$
+ create function moyenneParEditeur(nom varchar(50))
+ returns float
+ Reads SQL DATA
+ begin
+	declare moyenne float;
+	select avg(prixvente) into moyenne from tarifer t 
+		 join ouvrage o on t.numouvr = o.numouvr
+		 join editeur e on o.nomed = e.nomed
+		 where e.nomed = nom;
+	return round(moyenne,2);	 
+ end $$
+ delimiter ;
  
  
+ select moyenneParEditeur('colin');
+ select moyenneParEditeur('eyrolles');
+ select moyenneParEditeur('cujas');
  
- 
- 
- 
- 
+ #ecrire une fonction qui affiche la moyenne des prix par ecrivain (nom et prénom)
  
  #Les procédures stockées
  
