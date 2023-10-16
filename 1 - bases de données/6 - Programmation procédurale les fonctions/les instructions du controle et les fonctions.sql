@@ -410,6 +410,8 @@ select FactorielR(1);
  select * from editeur;
  
 
+ #ecrire une fonction qui affiche la moyenne des prix par editeur
+
  
  drop function if exists moyenneParEditeur;
  delimiter $$
@@ -430,23 +432,4 @@ select FactorielR(1);
  select moyenneParEditeur('colin');
  select moyenneParEditeur('eyrolles');
  select moyenneParEditeur('cujas');
- 
- #ecrire une fonction qui affiche la moyenne des prix par ecrivain (nom et prénom)
- 
- #Les procédures stockées
- 
- #Les views
- 
- #Les tables temporaires
   
- # Les triggers (les déclencheurs)
-  
- #Les transactions
- 
- #Les cursseurs
- 
- #La gestion des erreurs
- 
- #La sécurité
- 
- #La sauvegarde et la resauration des données
