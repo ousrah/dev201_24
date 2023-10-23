@@ -41,5 +41,36 @@ begin
 end $$
 delimiter ; 
 
+#Methode simple
+drop trigger if exists t3;
+delimiter $$
+create trigger t3 after update on ligne for each row
+begin
+	 update produit set qteStock = qteStock + old.qte where id = old.id_produit;
+	 update produit set qteStock = qteStock - new.qte where id = old.id_produit;
+end $$
+delimiter ;
+
+#methode complète
+drop trigger if exists t3;
+ delimiter $$
+create trigger t3 after update on ligne for each row
+begin
+	if old.qte<>new.qte then
+		update produit set qteStock = qteStock + (old.qte-new.qte) where id = old.id_produit;
+	end if;
+end $$
+delimiter ;
+
+
+ 
+select*from produit;
+select*from ligne;
+insert into ligne values (1,1,4,100);
+update ligne set qte=2 where id_commande=1 and id_produit=1;
+delete from ligne where id_commande=1 and id_produit=1;
+
+
+
  
  

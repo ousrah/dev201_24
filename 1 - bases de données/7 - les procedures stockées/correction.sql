@@ -385,6 +385,29 @@ call ps7(2);
 #associés (numéro et nom) Sinon afficher un message 'Ce fournisseur 
 #n'a aucun ingrédient associé. Il sera supprimé' et 
 #supprimer ce fournisseur
+drop procedure if exists ps8;
+delimiter $$
+	create procedure ps8(num int)
+	begin
+		declare nb int;
+		declare nbIng int;
+		select count(*) into nb from fournisseur where numfou = num;
+		if nb=0 then
+			select 'Aucun fournisseur ne porte ce numéro';
+		else
+			select count(*) into nbIng from ingrédients where numfou = num;
+			if nbIng = 0 then
+				select 'ce fournisseur n''a aucun ingrédient';
+				delete from fournisseur where numfou = num;
+			else
+				select NumIng,NomIng from ingrédients where numfou = num;
+			end if;
+		end if;
+	end $$
+delimiter ;
+select * from fournisseur;
+call ps8(4);
+insert into fournisseur values (4,'test','test');
 
 
 
