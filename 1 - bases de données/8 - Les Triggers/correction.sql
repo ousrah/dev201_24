@@ -23,14 +23,37 @@ end $$
 delimiter ;
 insert into vol values
 (15,'tetouan','casa','2023-10-01 09:00','2023-10-01 10:00',2,1);
-select * from pilote;
-
+select * from vol;
+select floor(rand()*23);
 #3 – Si on supprime un vol le nombre d’heures de vols du pilote qui a effectué ce vol doit être recalculé. Proposez une solution.
-
-
+drop trigger if exists t2;
+delimiter $$
+create trigger t2 after delete on Vol for each row
+begin 
+	update pilote set NBHV=NBHV-timediff(old.datea, old.dated) where numpilote= old.numpil ;
+end $$
+delimiter ;
+delete from vol where numvol=15;
+select * from pilote;
 #4 – Si on modifie la date de départ ou d’arrivée d’un vol le nombre d’heures de vols du pilote qui a effectué ce vol doit être recalculé. Proposez une solution.
 
+drop trigger if exists q4;
+delimiter $$
+create trigger q4 after update on vol for each row
+begin
 
+    declare ancienne_duree time;
+    declare nouvelle_duree time;
+    set ancienne_duree = timediff(old.datea, old.dated);
+    set nouvelle_duree = timediff(new.datea, old.dated);
+    update pilote
+		set nbhv = nbhv - ancienne_duree + nouvelle_duree
+		where numpilote = new.numpil;
+end $$
+delimiter ;
+update vol set datea = '2023-10-01 10:00:00' where numvol = 14;
+select * from pilote;
+select * from vol;
 
 /*EX 2 - Soit la base de données suivante :  (Utilisez celle de la série des PS):
 
@@ -39,6 +62,7 @@ EMPLOYE (ID_EMP, NOM_EMP, PRENOM_EMP, DATE_NAIS_EMP, SALAIRE, #ID_DEP)
 */
 #1 – Ajouter le champs salaire moyen dans la table département.
 #2 – On souhaite que le salaire moyen soit recalculé automatiquement si on ajoute un nouvel employé, on supprime ou on modifie le salaire d’un ou plusieurs employés. Proposez une solution.
+
 
 /*EX 2 - Soit la base de données suivante : (Utilisez celle de la série des PS):
 Recettes (NumRec, NomRec, MethodePreparation, TempsPreparation)
