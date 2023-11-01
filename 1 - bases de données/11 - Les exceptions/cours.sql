@@ -254,6 +254,11 @@ delimiter $$
 create procedure divide(a float, b float)
 begin
 	declare r float;
+	if b=0 then
+		signal sqlstate '23000' set mysql_errno=10000, message_text = "blablabla";
+    
+    end if;
+ 
 	set r = a/b;
     select r;
 end $$
