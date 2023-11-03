@@ -255,7 +255,7 @@ create procedure divide(a float, b float)
 begin
 	declare r float;
 	if b=0 then
-		signal sqlstate '23000' set mysql_errno=10000, message_text = "blablabla";
+		signal sqlstate '23000' set mysql_errno=10000, me = "blablabla";
     
     end if;
  
