@@ -267,6 +267,30 @@ delimiter ;
 call divide(3,0);
 
 
+use dev201_204;
+select * from test;
+
+
+drop procedure if exists divide;
+delimiter $$
+create procedure divide(a int, b int, out r float)
+begin
+	declare division_by_zero condition for sqlstate '23000';
+	declare continue handler for division_by_zero
+		resignal set message_text = "division par zero impossible";
+    if b =0 then
+		signal division_by_zero;
+	else
+		set r = a/b;    
+    end if;
+    
+end $$
+delimiter ;
+
+call divide(3,0,@r);
+select @r;
+
+select * from test;
 #Les transactions
 
 
