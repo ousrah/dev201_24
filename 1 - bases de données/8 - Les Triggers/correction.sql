@@ -114,6 +114,7 @@ Fournisseur (NumFou, RSFou, AdrFou)
 #1 – Ajoutez le champ prix à la table recettes.
 use cuisine_201;
 alter table recettes add column prix float default 0;
+
 #2 – On souhaite que le prix de la recette soit calculé automatiquement 
 #si on ajoute un nouvel ingrédient, on supprime un ingrédient ou on modifie la quantité ou le prix 
 #d’un ou plusieurs ingrédients. Proposez une solution. 
@@ -174,14 +175,41 @@ update Composition_Recette set qteutilisee=0 where numrec = 6 and numing=1;
 
 
 update recettes set prix = 0;
+select * from recettes;
 
 
 
+select * from ingrédients;
+
+select * from composition_recette;
 
 
-
-
-
+drop trigger if exists t5;
+delimiter $$
+create trigger t5 after update on ingrédients for each row
+begin
+	declare numr int;
+    declare prixx float;
+    declare flag boolean default false;
+    declare c1 cursor for select distinct numRec from composition_recette where numIng = new.numIng;
+    declare continue handler for not found set flag = true;
+    open c1;
+		b1:loop
+			fetch c1 into numr;
+            if flag then
+				leave b1;
+			end if;
+            select sum(PuIng*qteutilisee) into prixx from composition_recette cp 
+					join ingrédients i on cp.numing=i.numing where numrec = numr;
+            update recettes set prix = prixx where numrec = numr;
+        end loop b1;
+    close c1;
+end $$
+delimiter ;
+select * from ingrédients;
+select * from recettes;
+update ingrédients
+set puing=5;
 
 
 

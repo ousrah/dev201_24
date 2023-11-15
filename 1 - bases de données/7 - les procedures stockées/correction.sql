@@ -419,4 +419,47 @@ insert into fournisseur values (4,'test','test');
 #Si le prix de reviens pour la recette est inférieur à 50 DH afficher le message
 #'Prix intéressant'
 
+select ceiling(rand()*22);
+use cuisine_201;
+select * from recettes;
+drop procedure if exists p9;
+delimiter &&
+create procedure p9()
+begin
+	declare nomr varchar(20);
+    declare temps int;
+    declare numr int;
+    declare met varchar(50);
+    declare flag boolean default false;
+    declare prix float;
+    declare c1 cursor for select nomrec,tempspreparation, numrec, methodepreparation from recettes;
+    declare continue handler for not found set flag=true;
+    open c1;
+		b1:loop
+			fetch c1 into nomr,temps, numr, met;
+			if flag then
+				leave b1;
+			end if ;
+			select concat("Recette : ","(",nomr,")"," temps de préparation :", "(",temps,")") as recette;
+            select noming , qteutilisee from ingrédients i join composition_recette cr on  i.numing = cr.numing where numrec = numr;
+			select concat("sa methode de preparation est ", met) as methode;
+            select sum(qteutilisee*pUing) into prix from ingrédients i join composition_recette cr on  i.numing = cr.numing where numrec = numr;
+            if prix <50 then
+				select concat("prix interessant -->", prix) as prix;
+            end if;
+        end loop b1;
+    close c1;
+
+end &&
+delimiter ;
+call p9();
+select * from ingrédients;
+update ingrédients set PUIng = 1;
+
+
+drop trigger t4;
+
+
+
+
 
