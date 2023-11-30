@@ -1,21 +1,9 @@
-La validation
-Les indexes
-La gestion des utilisateurs
----------
-Les séries 3 et 4
----------
-mongodb & php
-mongodb & python
----------
-les exposés
-la préparation du controle 2
-
-
 
 
 #backup/restore
 
 mongodump --db dblp --out=c:\users\9571\desktop 
+
 mongorestore --db dblp --drop c:\users\9571\desktop\dblp
 
 
