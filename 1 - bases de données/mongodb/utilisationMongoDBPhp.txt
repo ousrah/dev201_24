@@ -1,7 +1,7 @@
 ...les indexes
 les validations
 ...la gestion des utilisateurs
-...la connection de python su mongodb
+...la connection de python sur mongodb
 
 la connection de php sur mongodb
 

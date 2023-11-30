@@ -1,0 +1,12 @@
+La validation
+Les indexes
+La gestion des utilisateurs
+---------
+Les séries 3 et 4
+---------
+mongodb & php
+mongodb & python
+---------
+les exposés
+la préparation du controle 2
+
