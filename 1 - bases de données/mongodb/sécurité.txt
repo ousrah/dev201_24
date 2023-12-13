@@ -1,0 +1,14 @@
+use admin
+
+db.createUser({user: "manager",pwd: "password","roles":[{"role":"dbAdmin","db":"dbsportifs"}]})
+
+
+mongod.cfg
+security:
+  authorization: enabled
+
+redémarrer mongo server
+
+
+
+mongodb://manager:password@localhost:27017/dbsportifs?authSource=admin
