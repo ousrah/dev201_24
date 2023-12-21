@@ -1,0 +1,35 @@
+Projet : Gestion de stock
+Analyse et structuration des produits (PBS)
+Planification et determination des travaux (WBS)
+Maquetage
+Analyse et conception de la base données
+Conception du diagramme des classes
+Realisation de la gestion de produits
+Ecran listes des produits
+Ecran ajout de nouvaux produits
+Ecran modificaitn produit
+Ecran confrimation de suppression produit
+Ecran des filtres et des tris
+Ralisation de la gestion de clients
+Ecran listes des clients
+Ecran ajout de nouvaux clients
+Ecran modificaitn client
+Ecran confrimation de suppression client
+Ecran des filtres et des tris
+Reporting
+Liste des clients
+fiche d'un client
+statistiques des clients
+clients par villes
+clients par produit
+clients par CA
+Liste des produits
+fiche d'un produit
+statistiques des produits 
+produits par catégories
+produits par fournisseur
+Tests
+Installation et déploiement
+Préparation de la documentation
+formation des utilisateur
+
