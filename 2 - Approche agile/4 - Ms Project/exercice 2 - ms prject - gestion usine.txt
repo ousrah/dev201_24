@@ -1,0 +1,38 @@
+projet gestion usine
+reunion initiale
+analyse
+conception du pbs
+conception du wbs
+maquetage
+reunion de validation
+rectification du pbs et wbs
+conception UML
+conception MCD/MLD
+conception gratphique
+reunion de validation
+realisation
+realisation de l'interface graphique
+realisation de la base de données
+gestion du personnel
+gestion de recrutement
+gestion des absences
+gestion des congés
+gestion du paiement
+reunion de validation
+gestion de production
+gestion de matière premières
+gestion des postes de travail
+gestion des processes
+gestion des commandes
+reunion de validation
+gestion des ventes
+gestion de stock
+gestion d'approvisionnement
+tableau de bord
+reunion de validation
+livraison
+tests
+rectifications
+installation
+formation des utilisateurs
+garantie
