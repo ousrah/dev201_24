@@ -36,3 +36,6 @@ push
 
 cheque développeur crée une issue qu'il attribue à un autre développeur, le développeur concerné doit réglé le problème et faire passé l'issue de open à close
 
+
+créez un fork de votre projet, faites des modifications dans votre nouveau projet, faites une demande de merge avec le projet initial
+
