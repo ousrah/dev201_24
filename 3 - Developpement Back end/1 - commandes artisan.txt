@@ -2,6 +2,7 @@ Méthode 1 d'installation
 	composer global require laravel/installer
 	laravel new nom_du_project
 
+
 méthode 2 d'installation
 	composer create-project laravel/laravel nom_du_project
 
@@ -18,6 +19,9 @@ méthode 3 d'installation
 php artisan serve
 
 php artisan migrate
+
+
+
 php artisan db:seed
 
 php artisan make:controller TestController

@@ -1,0 +1,41 @@
+installer php 8.3.4
+configurer php.ini
+configurer path avec le chemin de php sur les variables d'environnement
+tester la version de php avec php --version
+
+installer mysql s'il n'est installé
+
+
+installer la derniere version de composer
+tester la version de composer avec composer --version
+
+installer laravel avec 
+composer global require laravel/installer
+tester la version de laravel avec larave --version
+
+créer un nouveau projet laravel avec
+laravel new blog201
+
+cd blog201
+
+ouvrir le dossier dans visual studio code
+code .
+
+ouvrir le fichier .env
+configurer la base de données
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=blog201
+DB_USERNAME=root
+DB_PASSWORD=123456
+
+excuter la migration
+php artisan migrate
+
+tester votre projet avec
+php artisan serve
+
+
+ 
