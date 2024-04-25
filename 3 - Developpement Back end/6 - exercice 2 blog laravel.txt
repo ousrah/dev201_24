@@ -4,6 +4,7 @@
 
 l'utilisateur ne peut avoir q'un seul téléphone et le téléphone ne peut être affecté qu'a un seul utilisateur
 chaque utilisateur peut avoir plusieurs roles et le role peut être affecte a plusieurs utilisateurs
+chaque post ou article est ecrit par un user
 chaque post peut avoir plusieurs commentaires et un commentaire peut concerner zero ou un post
 chaque article peut avoir plusieurs commentaires et un commentaire peut concerner zero ou un article
 chaque utilisateur peut ecrire plusieurs commentaires et un commentaire ne peut être ecris que par un et un seul utilisateur
@@ -14,8 +15,8 @@ Users (id, name, email, password)
 Roles (id, name, description)
 UserRoles(user_id, role_id)
 Phones(id,number, user_id)
-Posts(id, title, description, image)
-Articles(id, title, description, image)
+Posts(id, title, description, image, user_id)
+Articles(id, title, description, image, user_id)
 Comments(id, comment, post_id, article_id, user_id)
 
 
@@ -35,7 +36,19 @@ Comments(id, comment, post_id, article_id, user_id)
 	- créer 10 utilisateurs avec chaqun deux roles aleatoires
 	- créer 10 posts et 10 articles avec des images -fak()->urlImage() et pour chaque post/article générer 10 commentaires.
 
-7 - Cherche un moyen de remplir les images avec des images réel en utilisant l'api theCatApi ou theDogApi
+7 - ajoutez les méthode relationnel a chaque Model .  Regardez la documentation officiel laravel relationships (https://laravel.com/docs/11.x/eloquent-relationships)
+
+User (comments(), roles(), phone())
+Roles (users())
+Phone (user())
+Posts(user(), comments()
+Article (user(), comments())
+comment(post() ou comment()) (morph)
+
+-------------------------
+
+
+7 - Cherche un moyen de remplir les images avec des images réel en utilisant l'api theCatApi ou theDogApi 
 
 8 - modifie le formulaire Create.blade.php pour qu'il fasse une vérification locale avec javascript avant d'envoyer (submit) le contenu du formulaire a la fonction store du controlleur
 
