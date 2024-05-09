@@ -14,22 +14,22 @@ class ProductController extends Controller
    }
 
 
-   public function test()
+   public function show()
    {
-
-    return "ok";
+    $product_id = request('product_id');
+    $product = Product::find($product_id);
+    return view ('products.show',compact('product'));
    }
 
 
    public function search()
    {
-        $word = request()->input('search');
-
+        $word = request('search');
         $products = Product::where('name','like','%'. $word .'%')
         ->orWhere ('description','like','%'. $word .'%')//;
      //   dd($products->toSql(),$products->getBindings());
         ->get();
-        return view('products.index', compact('products'));
+        return view('products.search', compact('products'));
 
    }
 }
