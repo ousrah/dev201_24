@@ -32,4 +32,21 @@ class ProductController extends Controller
         return view('products.search', compact('products'));
 
    }
+
+   public function delete()
+   {
+        $product_id = request('txtId');
+        $product = Product::find($product_id);
+        try{
+            $product->delete();
+            return "ok";
+
+        }
+        catch(Exception $e) {
+            return "error";
+        }
+
+
+   }
+
 }

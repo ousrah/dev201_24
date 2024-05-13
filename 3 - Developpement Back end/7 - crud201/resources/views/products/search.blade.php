@@ -6,7 +6,7 @@
         <th class="bg-black text-white font-bold w-12">@lang('Action')</th>
     </tr>
     @foreach ($products as $product)
-        <tr>
+        <tr id="row{{$product->id}}">
             <td>{{ $product->id}}</td>
             <td>{{ $product->name}}</td>
             <td>{!! $product->description !!}</td>
@@ -19,7 +19,7 @@
     @endforeach
 </table>
 <script>
-    $(".btnShow").on('click',function(){
+    $(document).on('click',".btnShow",function(){
         var product_id = $(this).attr('v');
         var myData = {'product_id': product_id};
         var url = '{{ route('products.show') }}';
@@ -32,5 +32,11 @@
         .catch(error => {
             console.log(error);
         });
+    })
+
+
+    $(document).on("click",".btnDelete",function(){
+        $("#txtId").val($(this).attr('v'));
+        $("#myModalDeleteProduct").show();
     })
 </script>

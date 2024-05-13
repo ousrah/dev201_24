@@ -36,12 +36,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0}
+  from {top:-500px; opacity:0}
   to {top:0; opacity:1}
 }
 
 @keyframes animatetop {
-  from {top:-300px; opacity:0}
+  from {top:-500px; opacity:0}
   to {top:0; opacity:1}
 }
 
