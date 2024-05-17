@@ -11,9 +11,9 @@
             <td>{{ $product->name}}</td>
             <td>{!! $product->description !!}</td>
             <td>
-                <button class="btnShow bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" v="{{$product->id}}">Show</button>
-                <button class="btnEdit bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" v="{{$product->id}}">Edit</button>
-                <button class="btnDelete bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" v="{{$product->id}}">Delete</button>
+                <button class="btnShow bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" v="{{$product->id}}">@lang('Showw')</button>
+                <button class="btnEdit bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" v="{{$product->id}}">{{ __('Edit')}}</button>
+                <button class="btnDelete bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" v="{{$product->id}}">{{ trans('Delete')}}</button>
             </td>
         </tr>
     @endforeach

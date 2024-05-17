@@ -23,3 +23,9 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::post('/products/search', [ProductController::class, 'search'])->name('products.search');
 Route::post('/products/show', [ProductController::class, 'show'])->name('products.show');
 Route::post('/products/delete', [ProductController::class, 'delete'])->name('products.delete');
+
+Route::get('/changeLocale/{locale}',function($locale){
+    session()->put('locale',$locale);
+    return redirect()->back();
+})->name('products.changeLocale');
+

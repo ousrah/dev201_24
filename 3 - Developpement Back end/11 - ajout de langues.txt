@@ -1,0 +1,7 @@
+
+L'internationalisation (changement de langue)
+
+composer require --dev laravel-lang/common
+php artisan lang:update
+php artisan lang:add fr es ar
+
