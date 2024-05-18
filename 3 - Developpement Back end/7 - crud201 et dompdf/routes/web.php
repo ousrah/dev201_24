@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +29,4 @@ Route::get('/changeLocale/{locale}',function($locale){
     return redirect()->back();
 })->name('products.changeLocale');
 
+Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate-pdf');

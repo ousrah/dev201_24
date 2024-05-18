@@ -1,0 +1,19 @@
+composer require barryvdh/laravel-dompdf
+
+ 
+https://dev.to/snehalkadwe/use-of-dompdf-in-laravel-10-opn
+
+
+https://github.com/barryvdh/laravel-dompdf
+
+
+<img class= "w-24" src="{{public_path('storage\images\logo.png')}}" alt="">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css" integrity="sha512-h+jxHd1kXOv1UbYfS8+kZXRwACrzoi2Lvc4hHa4Jbb4xGd7yXHlGgYzq3KjMkVt+ZABsTynT7iC2Q1yV7skacQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+
+
+
