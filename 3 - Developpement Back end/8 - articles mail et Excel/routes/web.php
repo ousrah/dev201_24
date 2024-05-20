@@ -20,3 +20,10 @@ Route::get('/', function () {
 
 Route::get('/mailing', [ArticleController::class, 'mailing'])->name("mailing");
 Route::get('send-mail', [MailController::class, 'index']);
+
+
+Route::controller(ArticleController::class)->group(function(){
+    Route::get('articles', 'index')->name('articles.index');
+    Route::get('articles-export', 'export')->name('articles.export');
+    Route::post('articles-import', 'import')->name('articles.import');
+});
