@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Auth\AuthController;
 
@@ -18,7 +19,9 @@ use App\Http\Controllers\Auth\AuthController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $pic = Auth()->user()->avatar;
+    return view('welcome', compact('pic'));
 });
 
 
@@ -30,6 +33,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate-pdf');
     Route::get('dashboard', [AuthController::class, 'dashboard']);
 });
+
+Route::post("/saveAvatar", [HomeController::class, 'saveAvatar'])->name("saveAvatar");
+Route::post("/saveCookie", [HomeController::class, 'saveCookie'])->name("saveCookie");
+Route::post("/saveSession", [HomeController::class, 'saveSession'])->name("saveSession");
+
 
 
 
